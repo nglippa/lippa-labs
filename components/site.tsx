@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, type Variants } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue, useSpring, type Variants } from "framer-motion";
 import {
   ArrowRight,
   BarChart3,
@@ -57,7 +57,7 @@ const labProducts = [
   {
     name: "SpendFence",
     category: "Adaptive Budgeting",
-    status: "Active Development",
+    status: "ACTIVE",
     icon: BarChart3,
     description:
       "AI-assisted budgeting built around spending fences, pacing awareness, bank syncing, and calmer financial decisions.",
@@ -69,7 +69,7 @@ const labProducts = [
   {
     name: "TradersDelight",
     category: "Trading Journal",
-    status: "In Development",
+    status: "EVOLVING",
     icon: LineChart,
     description:
       "Trading review system for ticker tracking, disciplined execution, AI-assisted reflection, and behavioral analysis.",
@@ -81,7 +81,7 @@ const labProducts = [
   {
     name: "Future Experiments",
     category: "Experimental Systems",
-    status: "Research Pipeline",
+    status: "RESEARCH",
     icon: Cpu,
     description:
       "Explorations in AI-assisted workflows, decision support, practical automation, and adaptive product surfaces.",
@@ -109,13 +109,37 @@ const values = [
   { title: "Privacy Awareness", body: "Sensitive workflows get careful data boundaries from day one.", icon: LockKeyhole }
 ];
 
+const particleField = [
+  { left: "8%", top: "18%", size: 3, delay: "0s" },
+  { left: "18%", top: "72%", size: 2, delay: "1.6s" },
+  { left: "32%", top: "28%", size: 2, delay: "2.2s" },
+  { left: "48%", top: "64%", size: 3, delay: "0.8s" },
+  { left: "62%", top: "16%", size: 2, delay: "3.1s" },
+  { left: "74%", top: "78%", size: 2, delay: "1.2s" },
+  { left: "86%", top: "38%", size: 3, delay: "2.8s" },
+  { left: "93%", top: "12%", size: 2, delay: "4s" }
+];
+
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const smoothX = useSpring(pointerX, { damping: 38, stiffness: 90 });
+  const smoothY = useSpring(pointerY, { damping: 38, stiffness: 90 });
+  const cursorLight = useMotionTemplate`radial-gradient(520px circle at ${smoothX}px ${smoothY}px, rgb(56 189 248 / 0.13), rgb(124 58 237 / 0.07) 32%, transparent 68%)`;
 
   return (
-    <div className="relative min-h-dvh overflow-x-clip bg-[#05060a] text-white">
+    <div
+      className="relative min-h-dvh overflow-x-clip bg-[#05060a] text-white"
+      onPointerMove={(event) => {
+        pointerX.set(event.clientX);
+        pointerY.set(event.clientY);
+      }}
+    >
       <div className="lab-grid pointer-events-none fixed inset-0" />
       <div className="lab-noise pointer-events-none fixed inset-0 opacity-[0.07]" />
+      <LabAtmosphere />
+      <motion.div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[1]" style={{ background: cursorLight }} />
       <motion.div
         aria-hidden="true"
         className="pointer-events-none fixed left-[-12rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-sky-500/22 blur-[110px]"
@@ -217,6 +241,32 @@ function BrandMark() {
   );
 }
 
+function LabAtmosphere() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+      <div className="absolute left-[8%] top-[18%] h-32 w-32 rounded-full border border-sky-200/10 opacity-60 [transform:rotateX(62deg)_rotateZ(-18deg)]">
+        <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-sky-200/70 shadow-[0_0_28px_rgb(125_211_252_/_0.45)]" />
+      </div>
+      <div className="absolute right-[9%] top-[22%] h-40 w-40 rounded-[2.5rem] border border-violet-200/10 bg-white/[0.018] opacity-70 [transform:rotate(18deg)]" />
+      <div className="absolute bottom-[16%] left-[42%] h-28 w-28 rounded-full border border-white/10 opacity-50 [transform:rotateX(68deg)]" />
+      {particleField.map((particle, index) => (
+        <span
+          key={`${particle.left}-${particle.top}`}
+          className="lab-particle absolute rounded-full bg-sky-100/70 shadow-[0_0_18px_rgb(125_211_252_/_0.48)]"
+          style={{
+            animationDelay: particle.delay,
+            height: particle.size,
+            left: particle.left,
+            top: particle.top,
+            width: particle.size,
+            opacity: 0.42 + index * 0.04
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
 export function HomePage() {
   return (
     <SiteShell>
@@ -235,9 +285,9 @@ function Hero() {
     <section className="relative px-5 pb-14 pt-14 sm:px-6 lg:px-8 lg:pb-20 lg:pt-20">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
         <motion.div variants={fadeUp} className="text-center lg:text-left">
-          <Badge icon={Orbit}>Independent product lab</Badge>
-          <h1 className="mx-auto mt-7 max-w-5xl text-5xl font-black leading-[0.98] tracking-[-0.04em] text-white sm:text-6xl lg:mx-0 lg:text-7xl">
-            Lippa Labs builds intelligent software for real-world decisions.
+          <Badge icon={Orbit}>Independent AI product lab</Badge>
+          <h1 className="mx-auto mt-7 max-w-5xl text-5xl font-black leading-[0.96] tracking-[-0.045em] text-white sm:text-6xl lg:mx-0 lg:text-7xl">
+            Building intelligent systems for real-world decisions.
           </h1>
           <p className="mx-auto mt-7 max-w-3xl text-base font-semibold leading-8 text-slate-300 sm:text-lg lg:mx-0">
             Independent product studio creating AI-assisted tools across finance, markets, productivity, and behavioral systems.
@@ -258,6 +308,7 @@ function Hero() {
 function HeroLabConsole() {
   return (
     <div className="relative min-h-[430px] sm:min-h-[500px]">
+      <NodeConstellation />
       <motion.div
         aria-hidden="true"
         className="absolute inset-4 rounded-[3rem] bg-[conic-gradient(from_210deg_at_50%_50%,rgb(56_189_248_/_0.30),rgb(124_58_237_/_0.32),rgb(255_255_255_/_0.08),rgb(56_189_248_/_0.30))] blur-3xl"
@@ -269,6 +320,7 @@ function HeroLabConsole() {
         animate={{ y: [0, -10, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
       >
+        <div className="scanline absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/80 to-transparent" />
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="flex gap-2">
             <span className="h-2.5 w-2.5 rounded-full bg-sky-300" />
@@ -294,6 +346,8 @@ function HeroLabConsole() {
           ))}
         </div>
       </motion.div>
+      <ExperimentCapsule className="absolute right-5 top-[8.5rem] w-24 sm:right-10 sm:w-28" tone="sky" />
+      <ExperimentCapsule className="absolute bottom-[7.5rem] left-[1.5rem] w-20 sm:w-24" tone="violet" delay={1.1} />
       <FloatingProductCard className="absolute right-0 top-0 w-[52%]" product={labProducts[0]} delay={0} />
       <FloatingProductCard className="absolute bottom-16 right-2 w-[58%]" product={labProducts[1]} delay={0.4} />
       <motion.div
@@ -320,6 +374,66 @@ function HeroLabConsole() {
   );
 }
 
+function NodeConstellation() {
+  return (
+    <motion.div
+      aria-hidden="true"
+      className="absolute inset-x-6 top-16 h-52 rounded-[2.5rem] border border-white/10 bg-[radial-gradient(circle_at_50%_45%,rgb(56_189_248_/_0.12),transparent_62%)] opacity-80"
+      animate={{ y: [0, 12, 0], opacity: [0.54, 0.82, 0.54] }}
+      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
+    >
+      <svg className="h-full w-full" viewBox="0 0 520 220" role="presentation">
+        <defs>
+          <linearGradient id="labLine" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0%" stopColor="rgb(125 211 252 / 0.05)" />
+            <stop offset="45%" stopColor="rgb(125 211 252 / 0.56)" />
+            <stop offset="100%" stopColor="rgb(167 139 250 / 0.08)" />
+          </linearGradient>
+        </defs>
+        <path d="M40 160 C130 40 230 194 318 84 S452 52 490 126" fill="none" stroke="url(#labLine)" strokeWidth="1.4" />
+        <path d="M86 92 L182 150 L278 70 L392 128" fill="none" stroke="rgb(255 255 255 / 0.10)" strokeWidth="1" />
+        {[
+          [40, 160],
+          [86, 92],
+          [182, 150],
+          [278, 70],
+          [318, 84],
+          [392, 128],
+          [490, 126]
+        ].map(([cx, cy]) => (
+          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="4" fill="rgb(226 232 240 / 0.85)" />
+        ))}
+      </svg>
+    </motion.div>
+  );
+}
+
+function ExperimentCapsule({ className, tone, delay = 0 }: { className: string; tone: "sky" | "violet"; delay?: number }) {
+  const isSky = tone === "sky";
+
+  return (
+    <motion.div
+      aria-hidden="true"
+      className={cn("overflow-hidden rounded-full border border-white/10 bg-white/[0.055] p-1 shadow-lab backdrop-blur-xl", className)}
+      animate={{ y: [0, -12, 0], rotate: [0, isSky ? 3 : -3, 0] }}
+      transition={{ duration: 7.8, repeat: Infinity, ease: "easeInOut", delay }}
+    >
+      <div className="relative h-40 overflow-hidden rounded-full border border-white/10 bg-black/30">
+        <motion.div
+          className={cn(
+            "lab-liquid absolute inset-x-0 bottom-0 h-[58%]",
+            isSky ? "bg-sky-300/45 shadow-[0_0_34px_rgb(56_189_248_/_0.32)]" : "bg-violet-400/42 shadow-[0_0_34px_rgb(167_139_250_/_0.28)]"
+          )}
+          animate={{ height: ["48%", "62%", "52%"] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
+        />
+        <div className="absolute inset-x-5 top-5 h-px bg-white/25" />
+        <div className="absolute inset-x-4 top-10 h-px bg-white/10" />
+      </div>
+    </motion.div>
+  );
+}
+
 function FloatingProductCard({ product, className, delay }: { product: (typeof labProducts)[number]; className: string; delay: number }) {
   const Icon = product.icon;
 
@@ -340,7 +454,7 @@ function FloatingProductCard({ product, className, delay }: { product: (typeof l
 
 function CurrentLabsSection() {
   return (
-    <Section eyebrow="Current Labs" title="Products with sharp edges and real-world use cases.">
+    <Section eyebrow="Current Experiments" title="Living software systems in active development.">
       <ProductGrid />
     </Section>
   );
@@ -457,18 +571,21 @@ function ProductCard({
       variants={fadeUp}
       whileHover={{ y: -9, rotateX: 1.5, rotateY: -1.5, transition: { duration: 0.22 } }}
       className={cn(
-        "group relative min-h-[28rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080b14]/78 p-5 shadow-lab backdrop-blur-2xl transition",
+        "group relative min-h-[30rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080b14]/78 p-5 shadow-lab backdrop-blur-2xl transition",
         ring
       )}
     >
       <div className={cn("absolute inset-x-0 top-0 h-52 bg-gradient-to-br opacity-100", accent)} />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(255_255_255_/_0.11),transparent_34rem)]" />
-      <div className="relative flex min-h-[25.5rem] flex-col">
+      <div className="scanline absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent opacity-0 transition group-hover:opacity-100" />
+      <SystemBackdrop icon={Icon} iconTone={iconTone} />
+      <div className="relative flex min-h-[27.5rem] flex-col">
         <div className="flex items-start justify-between gap-4">
           <div className={cn("grid h-12 w-12 place-items-center rounded-2xl border border-white/10 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.08)]", iconTone)}>
             <Icon size={23} />
           </div>
-          <span className="rounded-full border border-white/10 bg-black/28 px-3 py-1 text-xs font-black text-slate-200">
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/28 px-3 py-1 text-xs font-black text-slate-200">
+            <span className="h-1.5 w-1.5 rounded-full bg-sky-200 shadow-[0_0_14px_rgb(125_211_252_/_0.75)]" />
             {status}
           </span>
         </div>
@@ -484,6 +601,29 @@ function ProductCard({
         </div>
       </div>
     </motion.article>
+  );
+}
+
+function SystemBackdrop({ icon: Icon, iconTone }: { icon: LucideIcon; iconTone: string }) {
+  return (
+    <div aria-hidden="true" className="absolute inset-x-5 bottom-5 h-40 overflow-hidden rounded-[1.5rem] border border-white/10 bg-black/24 opacity-75 transition group-hover:opacity-100">
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgb(255_255_255_/_0.045)_1px,transparent_1px),linear-gradient(rgb(255_255_255_/_0.04)_1px,transparent_1px)] bg-[size:26px_26px]" />
+      <motion.div
+        className={cn("absolute left-5 top-5 grid h-12 w-12 place-items-center rounded-2xl", iconTone)}
+        animate={{ y: [0, -7, 0], rotate: [0, 2, 0] }}
+        transition={{ duration: 6.8, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <Icon size={20} />
+      </motion.div>
+      <motion.div
+        className="absolute bottom-5 right-5 h-20 w-20 rounded-full border border-sky-200/20"
+        animate={{ scale: [1, 1.12, 1], opacity: [0.42, 0.76, 0.42] }}
+        transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div className="absolute bottom-8 left-24 right-8 h-px bg-gradient-to-r from-sky-200/0 via-sky-200/45 to-violet-200/0" />
+      <div className="absolute bottom-14 left-20 h-2 w-2 rounded-full bg-white/80 shadow-[0_0_18px_rgb(255_255_255_/_0.45)]" />
+      <div className="absolute bottom-20 right-16 h-2 w-2 rounded-full bg-sky-200/80 shadow-[0_0_18px_rgb(125_211_252_/_0.50)]" />
+    </div>
   );
 }
 
