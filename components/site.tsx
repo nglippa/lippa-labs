@@ -10,19 +10,24 @@ import {
   BrainCircuit,
   CheckCircle2,
   ChevronRight,
+  Code2,
   Cpu,
+  Fingerprint,
+  Layers3,
   LineChart,
   LockKeyhole,
   Mail,
-  MessageSquare,
+  Orbit,
+  PanelTop,
   Radar,
   Rocket,
   ShieldCheck,
   Sparkles,
-  Target,
   Workflow,
+  Zap,
   type LucideIcon
 } from "lucide-react";
+
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -34,25 +39,32 @@ const navItems = [
 ];
 
 const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 18 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.58, ease: [0.2, 0.8, 0.2, 1] } }
+  hidden: { opacity: 0, y: 26, filter: "blur(10px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  }
 };
 
 const stagger: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } }
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.08 } }
 };
 
-const products = [
+const labProducts = [
   {
     name: "SpendFence",
     category: "Adaptive Budgeting",
     status: "Active Development",
     icon: BarChart3,
     description:
-      "AI-assisted budgeting platform focused on spending fences, pacing awareness, adaptive insights, and clean financial decision support.",
-    features: ["Adaptive budgeting", "AI insights", "Bank syncing", "Pacing analysis", "Intelligent fence recommendations"],
-    accent: "from-indigo-500/18 via-sky-500/10 to-transparent"
+      "AI-assisted budgeting built around spending fences, pacing awareness, bank syncing, and calmer financial decisions.",
+    features: ["Adaptive budgeting", "AI insights", "Bank syncing", "Pacing analysis"],
+    accent: "from-sky-400/32 via-blue-600/18 to-transparent",
+    ring: "group-hover:border-sky-300/45",
+    iconTone: "text-sky-200 bg-sky-400/12"
   },
   {
     name: "TradersDelight",
@@ -60,39 +72,62 @@ const products = [
     status: "In Development",
     icon: LineChart,
     description:
-      "Trading review and journaling platform focused on disciplined execution, ticker tracking, AI-assisted trade reflection, and behavioral analysis.",
-    features: ["Trade review", "Ticker tracking", "Execution notes", "AI-assisted reflection", "Behavioral analysis"],
-    accent: "from-cyan-500/16 via-indigo-500/10 to-transparent"
+      "Trading review system for ticker tracking, disciplined execution, AI-assisted reflection, and behavioral analysis.",
+    features: ["Trade review", "Ticker tracking", "Execution notes", "Behavior loops"],
+    accent: "from-violet-400/34 via-fuchsia-600/18 to-transparent",
+    ring: "group-hover:border-violet-300/45",
+    iconTone: "text-violet-200 bg-violet-400/12"
   },
   {
-    name: "Future Labs",
+    name: "Future Experiments",
     category: "Experimental Systems",
     status: "Research Pipeline",
     icon: Cpu,
     description:
-      "Future tools exploring AI-assisted workflows, behavioral systems, and practical automation for everyday decisions.",
-    features: ["Decision support", "Workflow intelligence", "Practical automation", "Adaptive systems", "Calm product surfaces"],
-    accent: "from-violet-500/16 via-slate-500/10 to-transparent"
+      "Explorations in AI-assisted workflows, decision support, practical automation, and adaptive product surfaces.",
+    features: ["Decision support", "Workflow AI", "Automation", "Adaptive systems"],
+    accent: "from-slate-200/22 via-indigo-500/16 to-transparent",
+    ring: "group-hover:border-white/28",
+    iconTone: "text-slate-100 bg-white/10"
   }
 ];
 
+const buildAreas = [
+  { title: "AI-assisted apps", body: "Software that turns noisy context into clear next actions.", icon: Bot },
+  { title: "Behavioral finance tools", body: "Products that respect timing, pressure, habits, and tradeoffs.", icon: BrainCircuit },
+  { title: "Trading/workflow systems", body: "Review loops for discipline, pattern awareness, and better execution.", icon: Workflow },
+  { title: "Decision support software", body: "Interfaces built to help people choose without drowning in inputs.", icon: Radar },
+  { title: "Mobile-first PWAs", body: "Fast, focused product surfaces designed for daily use.", icon: PanelTop }
+];
+
 const values = [
-  { title: "Practical AI", body: "AI should clarify decisions, not create another layer of noise.", icon: Bot },
-  { title: "User Control", body: "Recommendations stay visible, explainable, and optional.", icon: ShieldCheck },
-  { title: "Clean Design", body: "Interfaces should feel calm, readable, and efficient on first use.", icon: Sparkles },
-  { title: "Fast Iteration", body: "Small, focused releases keep products close to real user needs.", icon: Rocket },
-  { title: "Behavioral Insight", body: "Useful software respects patterns, timing, pressure, and context.", icon: BrainCircuit },
-  { title: "Privacy Awareness", body: "Sensitive workflows deserve careful data boundaries from day one.", icon: LockKeyhole }
+  { title: "Practical AI", body: "AI as leverage for clarity, not novelty for its own sake.", icon: Sparkles },
+  { title: "User Control", body: "People stay in the loop when products make recommendations.", icon: ShieldCheck },
+  { title: "Clean Design", body: "High signal, low clutter, and interfaces that feel intentional.", icon: Layers3 },
+  { title: "Fast Iteration", body: "Tight product loops that move from idea to working surface quickly.", icon: Rocket },
+  { title: "Behavioral Insight", body: "Software shaped around how people actually act under pressure.", icon: Fingerprint },
+  { title: "Privacy Awareness", body: "Sensitive workflows get careful data boundaries from day one.", icon: LockKeyhole }
 ];
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="relative min-h-dvh overflow-x-clip">
-      <div className="page-grid pointer-events-none fixed inset-0 opacity-70" />
-      <div className="noise pointer-events-none fixed inset-0 opacity-[0.025] dark:opacity-[0.045]" />
-      <div className="pointer-events-none fixed left-1/2 top-[-12rem] h-[34rem] w-[34rem] -translate-x-1/2 rounded-full bg-indigo-500/20 blur-3xl [animation:glow-drift_9s_ease-in-out_infinite]" />
+    <div className="relative min-h-dvh overflow-x-clip bg-[#05060a] text-white">
+      <div className="lab-grid pointer-events-none fixed inset-0" />
+      <div className="lab-noise pointer-events-none fixed inset-0 opacity-[0.07]" />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed left-[-12rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-sky-500/22 blur-[110px]"
+        animate={{ x: [0, 70, 0], y: [0, 34, 0], opacity: [0.42, 0.72, 0.42] }}
+        transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed bottom-[-14rem] right-[-10rem] h-[38rem] w-[38rem] rounded-full bg-violet-600/24 blur-[120px]"
+        animate={{ x: [0, -54, 0], y: [0, -28, 0], opacity: [0.38, 0.68, 0.38] }}
+        transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
+      />
       <Header pathname={pathname} />
       <motion.main initial="hidden" animate="show" variants={stagger} className="relative z-10">
         {children}
@@ -104,13 +139,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
 function Header({ pathname }: { pathname: string }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-slate-900/8 bg-white/70 px-4 pt-[env(safe-area-inset-top)] backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/62">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05060a]/72 px-4 pt-[env(safe-area-inset-top)] shadow-[0_1px_0_rgb(255_255_255_/_0.04)] backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 py-3">
         <Link href="/" aria-label="Lippa Labs home" className="group flex min-w-0 items-center gap-3">
           <BrandMark />
-          <span className="truncate text-base font-black tracking-tight text-slate-950 dark:text-white sm:text-lg">Lippa Labs</span>
+          <span className="truncate text-base font-black tracking-tight text-white sm:text-lg">Lippa Labs</span>
         </Link>
-        <nav className="hidden items-center gap-1 rounded-full border border-slate-900/8 bg-white/70 p-1 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.7)] dark:border-white/10 dark:bg-white/[0.055] md:flex">
+        <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.045] p-1 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.08)] md:flex">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -118,19 +153,19 @@ function Header({ pathname }: { pathname: string }) {
               className={cn(
                 "rounded-full px-3 py-2 text-sm font-black transition",
                 pathname === item.href
-                  ? "bg-slate-950 text-white shadow-soft dark:bg-white dark:text-slate-950"
-                  : "text-slate-600 hover:bg-slate-950/5 hover:text-slate-950 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-white"
+                  ? "bg-white text-slate-950 shadow-[0_10px_34px_rgb(125_211_252_/_0.14)]"
+                  : "text-slate-300 hover:bg-white/10 hover:text-white"
               )}
             >
               {item.label}
             </Link>
           ))}
         </nav>
-        <Link href="/contact" className="hidden min-h-10 items-center rounded-2xl bg-slate-950 px-4 text-sm font-black text-white shadow-soft transition hover:-translate-y-0.5 dark:bg-white dark:text-slate-950 sm:inline-flex">
+        <Link href="/contact" className="hidden min-h-10 items-center rounded-2xl border border-sky-300/25 bg-sky-300/10 px-4 text-sm font-black text-sky-100 shadow-[0_0_34px_rgb(56_189_248_/_0.14)] transition hover:-translate-y-0.5 hover:bg-sky-300/20 sm:inline-flex">
           Contact
         </Link>
       </div>
-      <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto pb-3 text-sm font-black text-slate-600 [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:hidden">
+      <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto pb-3 text-sm font-black [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:hidden">
         {navItems.map((item) => (
           <Link
             key={item.href}
@@ -138,8 +173,8 @@ function Header({ pathname }: { pathname: string }) {
             className={cn(
               "shrink-0 rounded-full border px-3 py-1.5 transition",
               pathname === item.href
-                ? "border-indigo-500/20 bg-indigo-500/10 text-indigo-700 dark:text-indigo-200"
-                : "border-slate-900/8 bg-white/55 dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-300"
+                ? "border-sky-300/30 bg-sky-300/10 text-sky-100"
+                : "border-white/10 bg-white/[0.045] text-slate-300"
             )}
           >
             {item.label}
@@ -152,19 +187,20 @@ function Header({ pathname }: { pathname: string }) {
 
 function Footer() {
   return (
-    <footer className="relative z-10 border-t border-slate-900/8 px-5 py-10 dark:border-white/10">
+    <footer className="relative z-10 border-t border-white/10 px-5 py-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
           <BrandMark />
           <div>
-            <p className="font-black text-slate-950 dark:text-white">Lippa Labs</p>
-            <p className="text-sm font-semibold text-slate-500 dark:text-slate-400">Building practical apps for real-life decisions.</p>
+            <p className="font-black text-white">Lippa Labs</p>
+            <p className="text-sm font-semibold text-slate-400">Independent product studio for practical AI software.</p>
           </div>
         </div>
-        <div className="flex flex-wrap gap-3 text-sm font-bold text-slate-500 dark:text-slate-400">
-          <Link href="/privacy" className="hover:text-slate-950 dark:hover:text-white">Privacy</Link>
-          <Link href="/terms" className="hover:text-slate-950 dark:hover:text-white">Terms</Link>
-          <Link href="/contact" className="hover:text-slate-950 dark:hover:text-white">Contact</Link>
+        <div className="flex flex-wrap gap-3 text-sm font-bold text-slate-400">
+          <Link href="/products" className="hover:text-white">Products</Link>
+          <Link href="/privacy" className="hover:text-white">Privacy</Link>
+          <Link href="/terms" className="hover:text-white">Terms</Link>
+          <Link href="/contact" className="hover:text-white">Contact</Link>
         </div>
       </div>
     </footer>
@@ -173,8 +209,9 @@ function Footer() {
 
 function BrandMark() {
   return (
-    <span aria-hidden="true" className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-2xl border border-slate-900/8 bg-slate-950 text-sm font-black text-white shadow-card dark:border-white/10 dark:bg-white dark:text-slate-950">
-      <span className="absolute inset-0 bg-[radial-gradient(circle_at_20%_0%,rgb(99_102_241_/_0.42),transparent_55%)]" />
+    <span aria-hidden="true" className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] text-sm font-black text-white shadow-[0_0_38px_rgb(56_189_248_/_0.16)]">
+      <span className="absolute inset-0 bg-[conic-gradient(from_160deg_at_50%_50%,rgb(56_189_248_/_0.75),rgb(124_58_237_/_0.55),rgb(255_255_255_/_0.12),rgb(56_189_248_/_0.75))]" />
+      <span className="absolute inset-[1px] rounded-[15px] bg-[#070910]" />
       <span className="relative">LL</span>
     </span>
   );
@@ -184,8 +221,9 @@ export function HomePage() {
   return (
     <SiteShell>
       <Hero />
-      <MissionSection />
-      <ProductsPreview />
+      <CurrentLabsSection />
+      <BuilderSection />
+      <WhatWeBuildSection />
       <ValuesSection />
       <CtaBand />
     </SiteShell>
@@ -194,97 +232,188 @@ export function HomePage() {
 
 function Hero() {
   return (
-    <section className="relative px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
-      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-center">
+    <section className="relative px-5 pb-14 pt-14 sm:px-6 lg:px-8 lg:pb-20 lg:pt-20">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
         <motion.div variants={fadeUp} className="text-center lg:text-left">
-          <Badge>Independent software studio</Badge>
-          <h1 className="mx-auto mt-6 max-w-5xl text-5xl font-black leading-[1.02] tracking-tight text-slate-950 dark:text-white sm:text-6xl lg:mx-0 lg:text-7xl">
-            Building practical apps for real-life decisions.
+          <Badge icon={Orbit}>Independent product lab</Badge>
+          <h1 className="mx-auto mt-7 max-w-5xl text-5xl font-black leading-[0.98] tracking-[-0.04em] text-white sm:text-6xl lg:mx-0 lg:text-7xl">
+            Lippa Labs builds intelligent software for real-world decisions.
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-base font-semibold leading-8 text-slate-600 dark:text-slate-300 sm:text-lg lg:mx-0">
-            Lippa Labs creates clean, AI-assisted software designed to reduce friction, surface patterns, and help people make better everyday decisions.
+          <p className="mx-auto mt-7 max-w-3xl text-base font-semibold leading-8 text-slate-300 sm:text-lg lg:mx-0">
+            Independent product studio creating AI-assisted tools across finance, markets, productivity, and behavioral systems.
           </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
             <PrimaryLink href="/products">View Products</PrimaryLink>
             <SecondaryLink href="/contact">Contact</SecondaryLink>
           </div>
         </motion.div>
         <motion.div variants={fadeUp} className="relative mx-auto w-full max-w-xl">
-          <div className="absolute -inset-5 rounded-[2.5rem] bg-[linear-gradient(135deg,rgb(99_102_241_/_0.24),rgb(14_165_233_/_0.12),transparent)] blur-2xl" />
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/60 bg-white/72 p-4 shadow-glow backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/70 sm:p-5">
-            <StudioPreview />
-          </div>
+          <HeroLabConsole />
         </motion.div>
       </div>
     </section>
   );
 }
 
-function StudioPreview() {
+function HeroLabConsole() {
   return (
-    <div className="grid gap-3">
-      <div className="flex items-center justify-between rounded-3xl border border-slate-900/8 bg-slate-950 p-4 text-white dark:border-white/10">
-        <div>
-          <p className="text-xs font-black uppercase tracking-[0.16em] text-indigo-200">Product pipeline</p>
-          <p className="mt-2 text-2xl font-black">3 focused systems</p>
+    <div className="relative min-h-[430px] sm:min-h-[500px]">
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-4 rounded-[3rem] bg-[conic-gradient(from_210deg_at_50%_50%,rgb(56_189_248_/_0.30),rgb(124_58_237_/_0.32),rgb(255_255_255_/_0.08),rgb(56_189_248_/_0.30))] blur-3xl"
+        animate={{ rotate: 360 }}
+        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute left-0 top-8 w-[82%] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.065] p-4 shadow-lab backdrop-blur-2xl sm:p-5"
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+      >
+        <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="flex gap-2">
+            <span className="h-2.5 w-2.5 rounded-full bg-sky-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-violet-300" />
+            <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
+          </div>
+          <span className="rounded-full bg-sky-300/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-sky-100">Live lab</span>
         </div>
-        <Sparkles className="text-indigo-200" size={22} />
-      </div>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <PreviewTile icon={BarChart3} title="SpendFence" body="Adaptive budgeting with pacing intelligence." />
-        <PreviewTile icon={LineChart} title="TradersDelight" body="Trading journal for review and discipline." />
-      </div>
-      <div className="rounded-3xl border border-slate-900/8 bg-white/80 p-4 dark:border-white/10 dark:bg-white/[0.055]">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-black text-slate-950 dark:text-white">Studio principles</p>
-          <span className="rounded-full bg-indigo-500/10 px-2.5 py-1 text-xs font-black text-indigo-700 dark:text-indigo-200">Practical AI</span>
-        </div>
-        <div className="mt-4 grid gap-2">
-          {["Clear interfaces", "Behavioral insight", "Privacy-aware systems"].map((item) => (
-            <div key={item} className="flex items-center gap-2 rounded-2xl bg-slate-950/[0.035] px-3 py-2 text-sm font-bold text-slate-700 dark:bg-white/[0.055] dark:text-slate-300">
-              <CheckCircle2 size={15} className="text-indigo-500" /> {item}
+        <div className="mt-5 grid gap-3">
+          <div className="rounded-2xl border border-sky-300/20 bg-sky-300/[0.075] p-4">
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-200">Signal engine</p>
+            <p className="mt-2 text-2xl font-black tracking-tight text-white">3 products moving</p>
+          </div>
+          {[
+            ["decision.patterns", "behavior + context"],
+            ["workflow.loop", "capture + reflect"],
+            ["interface.state", "fast + mobile"]
+          ].map(([key, value]) => (
+            <div key={key} className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/24 px-4 py-3 font-mono text-xs">
+              <span className="text-slate-400">{key}</span>
+              <span className="text-slate-100">{value}</span>
             </div>
           ))}
         </div>
+      </motion.div>
+      <FloatingProductCard className="absolute right-0 top-0 w-[52%]" product={labProducts[0]} delay={0} />
+      <FloatingProductCard className="absolute bottom-16 right-2 w-[58%]" product={labProducts[1]} delay={0.4} />
+      <motion.div
+        className="absolute bottom-0 left-4 w-[64%] rounded-[1.75rem] border border-white/10 bg-[#080b14]/86 p-4 shadow-lab backdrop-blur-2xl"
+        animate={{ y: [0, 12, 0] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+      >
+        <div className="flex items-center gap-3">
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-violet-400/12 text-violet-100">
+            <Code2 size={19} />
+          </div>
+          <div>
+            <p className="text-sm font-black text-white">Future Experiments</p>
+            <p className="text-xs font-bold text-slate-400">AI workflow systems</p>
+          </div>
+        </div>
+        <div className="mt-4 grid grid-cols-4 gap-1.5">
+          {[42, 70, 58, 86].map((height, index) => (
+            <span key={height} className="rounded-full bg-gradient-to-t from-violet-500/55 to-sky-300/70" style={{ height: `${height}px`, opacity: 0.55 + index * 0.1 }} />
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+function FloatingProductCard({ product, className, delay }: { product: (typeof labProducts)[number]; className: string; delay: number }) {
+  const Icon = product.icon;
+
+  return (
+    <motion.div
+      className={cn("rounded-[1.75rem] border border-white/10 bg-[#080b14]/82 p-4 shadow-lab backdrop-blur-2xl", className)}
+      animate={{ y: [0, -14, 0], rotate: [0, 1.2, 0] }}
+      transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay }}
+    >
+      <div className={cn("grid h-10 w-10 place-items-center rounded-2xl", product.iconTone)}>
+        <Icon size={19} />
       </div>
-    </div>
+      <p className="mt-4 text-sm font-black text-white">{product.name}</p>
+      <p className="mt-1 text-xs font-bold leading-5 text-slate-400">{product.category}</p>
+    </motion.div>
   );
 }
 
-function PreviewTile({ icon: Icon, title, body }: { icon: LucideIcon; title: string; body: string }) {
+function CurrentLabsSection() {
   return (
-    <div className="rounded-3xl border border-slate-900/8 bg-white/80 p-4 dark:border-white/10 dark:bg-white/[0.055]">
-      <Icon size={20} className="text-indigo-600 dark:text-indigo-300" />
-      <p className="mt-3 font-black text-slate-950 dark:text-white">{title}</p>
-      <p className="mt-1 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-400">{body}</p>
-    </div>
+    <Section eyebrow="Current Labs" title="Products with sharp edges and real-world use cases.">
+      <ProductGrid />
+    </Section>
   );
 }
 
-function MissionSection() {
+function BuilderSection() {
   return (
-    <Section eyebrow="Mission" title="Software should reduce friction.">
-      <motion.div variants={fadeUp} className="max-w-4xl rounded-[2rem] border border-slate-900/8 bg-white/70 p-6 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.055] sm:p-8">
-        <p className="text-lg font-semibold leading-8 text-slate-700 dark:text-slate-300">
-          Lippa Labs focuses on clarity over complexity, thoughtful UX, practical AI, and tools grounded in real human behavior. The goal is to build systems that feel calm instead of overwhelming, especially around decisions that people revisit every day.
-        </p>
+    <section className="px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
+      <motion.div variants={fadeUp} className="mx-auto grid max-w-7xl gap-5 lg:grid-cols-[0.88fr_1.12fr] lg:items-stretch">
+        <div className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-lab backdrop-blur-2xl sm:p-8">
+          <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-sky-400/18 blur-3xl" />
+          <Badge icon={Fingerprint}>Founder / builder</Badge>
+          <h2 className="relative mt-6 text-4xl font-black leading-[1.02] tracking-[-0.035em] text-white sm:text-5xl">Built by Nicholas Lippa</h2>
+          <p className="relative mt-5 text-base font-semibold leading-8 text-slate-300">
+            Lippa Labs is founder-led, product-obsessed, and built around fast iteration. The focus is simple: practical AI, clean interfaces, and tools that make hard decisions easier to act on.
+          </p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <MetricCard value="01" label="Founder-led product direction" />
+          <MetricCard value="AI" label="Practical intelligence, not decoration" />
+          <MetricCard value="PWA" label="Mobile-first surfaces for daily workflows" />
+        </div>
+      </motion.div>
+    </section>
+  );
+}
+
+function MetricCard({ value, label }: { value: string; label: string }) {
+  return (
+    <motion.div variants={fadeUp} whileHover={{ y: -6, rotate: -0.5 }} className="rounded-[1.75rem] border border-white/10 bg-[#080b14]/72 p-5 shadow-lab backdrop-blur-2xl">
+      <p className="text-4xl font-black tracking-[-0.04em] text-white">{value}</p>
+      <p className="mt-4 text-sm font-bold leading-6 text-slate-400">{label}</p>
+    </motion.div>
+  );
+}
+
+function WhatWeBuildSection() {
+  return (
+    <Section eyebrow="What we build" title="AI product systems for decisions, workflows, and momentum.">
+      <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        {buildAreas.map((area) => (
+          <MiniLabCard key={area.title} {...area} />
+        ))}
       </motion.div>
     </Section>
   );
 }
 
-function ProductsPreview() {
+function MiniLabCard({ title, body, icon: Icon }: { title: string; body: string; icon: LucideIcon }) {
   return (
-    <Section eyebrow="Products" title="Focused products with room to grow.">
-      <ProductGrid />
-    </Section>
+    <motion.article
+      variants={fadeUp}
+      whileHover={{ y: -7, rotateX: 2, rotateY: -2 }}
+      className="group relative min-h-56 overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.045] p-5 shadow-lab backdrop-blur-2xl transition"
+    >
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-br from-sky-400/18 via-violet-500/12 to-transparent opacity-0 transition group-hover:opacity-100" />
+      <div className="relative grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/10 text-sky-100">
+        <Icon size={20} />
+      </div>
+      <h3 className="relative mt-6 text-lg font-black tracking-tight text-white">{title}</h3>
+      <p className="relative mt-3 text-sm font-semibold leading-6 text-slate-400">{body}</p>
+    </motion.article>
   );
 }
 
 export function ProductsPage() {
   return (
     <SiteShell>
-      <PageHero eyebrow="Products" title="Applications for finance, review, and practical decision support." body="Lippa Labs products are built around clean product surfaces, useful AI assistance, and feedback loops that help people understand behavior over time." />
+      <PageHero
+        eyebrow="Products"
+        title="A compact lab portfolio across finance, markets, and adaptive systems."
+        body="Lippa Labs products are built as focused systems: clean interfaces, AI-assisted feedback loops, and workflows that become more useful over time."
+      />
       <Section>
         <ProductGrid />
       </Section>
@@ -295,7 +424,7 @@ export function ProductsPage() {
 function ProductGrid() {
   return (
     <motion.div variants={stagger} className="grid gap-5 lg:grid-cols-3">
-      {products.map((product) => (
+      {labProducts.map((product) => (
         <ProductCard key={product.name} {...product} />
       ))}
     </motion.div>
@@ -309,7 +438,9 @@ function ProductCard({
   icon: Icon,
   description,
   features,
-  accent
+  accent,
+  ring,
+  iconTone
 }: {
   name: string;
   category: string;
@@ -318,29 +449,35 @@ function ProductCard({
   description: string;
   features: string[];
   accent: string;
+  ring: string;
+  iconTone: string;
 }) {
   return (
     <motion.article
       variants={fadeUp}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
-      className="group relative overflow-hidden rounded-[2rem] border border-slate-900/8 bg-white/72 p-5 shadow-card backdrop-blur-xl transition dark:border-white/10 dark:bg-white/[0.055]"
+      whileHover={{ y: -9, rotateX: 1.5, rotateY: -1.5, transition: { duration: 0.22 } }}
+      className={cn(
+        "group relative min-h-[28rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080b14]/78 p-5 shadow-lab backdrop-blur-2xl transition",
+        ring
+      )}
     >
-      <div className={cn("absolute inset-x-0 top-0 h-40 bg-gradient-to-br opacity-90", accent)} />
-      <div className="relative">
+      <div className={cn("absolute inset-x-0 top-0 h-52 bg-gradient-to-br opacity-100", accent)} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgb(255_255_255_/_0.11),transparent_34rem)]" />
+      <div className="relative flex min-h-[25.5rem] flex-col">
         <div className="flex items-start justify-between gap-4">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-slate-950 text-white shadow-soft dark:bg-white dark:text-slate-950">
-            <Icon size={22} />
+          <div className={cn("grid h-12 w-12 place-items-center rounded-2xl border border-white/10 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.08)]", iconTone)}>
+            <Icon size={23} />
           </div>
-          <span className="rounded-full border border-slate-900/8 bg-white/70 px-3 py-1 text-xs font-black text-slate-600 dark:border-white/10 dark:bg-white/[0.08] dark:text-slate-300">
+          <span className="rounded-full border border-white/10 bg-black/28 px-3 py-1 text-xs font-black text-slate-200">
             {status}
           </span>
         </div>
-        <p className="mt-6 text-sm font-black uppercase tracking-[0.16em] text-indigo-700 dark:text-indigo-300">{category}</p>
-        <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-950 dark:text-white">{name}</h2>
-        <p className="mt-3 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">{description}</p>
-        <div className="mt-5 flex flex-wrap gap-2">
+        <p className="mt-7 text-sm font-black uppercase tracking-[0.18em] text-sky-200/90">{category}</p>
+        <h2 className="mt-2 text-3xl font-black tracking-[-0.035em] text-white">{name}</h2>
+        <p className="mt-4 text-sm font-semibold leading-7 text-slate-300">{description}</p>
+        <div className="mt-auto flex flex-wrap gap-2 pt-7">
           {features.map((feature) => (
-            <span key={feature} className="rounded-full border border-slate-900/8 bg-white/68 px-2.5 py-1 text-xs font-black text-slate-600 dark:border-white/10 dark:bg-white/[0.06] dark:text-slate-300">
+            <span key={feature} className="rounded-full border border-white/10 bg-white/[0.055] px-2.5 py-1 text-xs font-black text-slate-300">
               {feature}
             </span>
           ))}
@@ -352,7 +489,7 @@ function ProductCard({
 
 function ValuesSection() {
   return (
-    <Section eyebrow="Values" title="Built with restraint, clarity, and momentum.">
+    <Section eyebrow="Operating values" title="The studio bias: useful, fast, controlled, and clean.">
       <motion.div variants={stagger} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {values.map((value) => (
           <ValueCard key={value.title} {...value} />
@@ -366,15 +503,15 @@ function ValueCard({ title, body, icon: Icon }: { title: string; body: string; i
   return (
     <motion.article
       variants={fadeUp}
-      whileHover={{ y: -4, transition: { duration: 0.2 } }}
-      className="relative overflow-hidden rounded-[1.75rem] border border-slate-900/8 bg-white/68 p-5 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.055]"
+      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/[0.045] p-5 shadow-lab backdrop-blur-2xl"
     >
-      <div className="absolute -right-10 -top-12 h-28 w-28 rounded-full bg-indigo-500/12 blur-2xl" />
-      <div className="relative grid h-11 w-11 place-items-center rounded-2xl bg-indigo-500/10 text-indigo-700 dark:text-indigo-200">
+      <div className="absolute -right-10 -top-12 h-28 w-28 rounded-full bg-violet-500/18 blur-2xl" />
+      <div className="relative grid h-11 w-11 place-items-center rounded-2xl border border-white/10 bg-white/10 text-violet-100">
         <Icon size={20} />
       </div>
-      <h3 className="relative mt-5 text-lg font-black text-slate-950 dark:text-white">{title}</h3>
-      <p className="relative mt-2 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">{body}</p>
+      <h3 className="relative mt-5 text-lg font-black text-white">{title}</h3>
+      <p className="relative mt-2 text-sm font-semibold leading-6 text-slate-400">{body}</p>
     </motion.article>
   );
 }
@@ -384,24 +521,25 @@ export function AboutPage() {
     <SiteShell>
       <PageHero
         eyebrow="About"
-        title="A founder-led studio building useful software with modern AI."
-        body="Lippa Labs is an independent software studio founded by Nicholas Lippa. The studio focuses on products that combine clean interfaces, practical AI, and real-world usefulness."
+        title="A founder-led product studio for practical AI software."
+        body="Lippa Labs was founded by Nicholas Lippa to build useful software that combines modern AI, clean interfaces, and real-world practicality."
       />
       <Section>
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <motion.div variants={fadeUp} className="rounded-[2rem] border border-slate-900/8 bg-slate-950 p-6 text-white shadow-glow dark:border-white/10 sm:p-8">
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-indigo-200">Founder-led development</p>
-            <h2 className="mt-4 text-3xl font-black tracking-tight">Independent, iterative, product-focused.</h2>
-            <p className="mt-4 text-base font-semibold leading-8 text-slate-300">
-              Lippa Labs builds in focused loops: ship useful surfaces, learn from real usage, and refine the product until the workflow feels natural.
+          <motion.div variants={fadeUp} className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-lab backdrop-blur-2xl sm:p-8">
+            <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-sky-400/18 blur-3xl" />
+            <p className="relative text-sm font-black uppercase tracking-[0.18em] text-sky-200">Built by Nicholas Lippa</p>
+            <h2 className="relative mt-4 text-4xl font-black tracking-[-0.04em] text-white">Independent, iterative, product-focused.</h2>
+            <p className="relative mt-5 text-base font-semibold leading-8 text-slate-300">
+              The studio builds in focused loops: identify a real workflow, ship a working surface, learn from usage, and refine until the product feels obvious.
             </p>
           </motion.div>
           <motion.div variants={stagger} className="grid gap-4">
             {[
               ["Modern AI", "AI assistance is used to surface patterns, reduce friction, and support reflection."],
-              ["Clean interfaces", "Products are designed to feel calm, legible, and trustworthy across devices."],
+              ["Clean interfaces", "Products are designed to feel fast, legible, and trustworthy across devices."],
               ["Real-world practicality", "Every product starts with a specific human workflow, not a vague technology demo."],
-              ["User-centered philosophy", "People should stay in control of decisions, especially in sensitive domains like finance."]
+              ["User-centered philosophy", "People stay in control of decisions, especially in sensitive domains like finance and markets."]
             ].map(([title, body]) => (
               <InfoRow key={title} title={title} body={body} />
             ))}
@@ -414,9 +552,9 @@ export function AboutPage() {
 
 function InfoRow({ title, body }: { title: string; body: string }) {
   return (
-    <motion.div variants={fadeUp} className="rounded-[1.5rem] border border-slate-900/8 bg-white/70 p-5 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.055]">
-      <h3 className="font-black text-slate-950 dark:text-white">{title}</h3>
-      <p className="mt-2 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">{body}</p>
+    <motion.div variants={fadeUp} className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 shadow-lab backdrop-blur-2xl">
+      <h3 className="font-black text-white">{title}</h3>
+      <p className="mt-2 text-sm font-semibold leading-6 text-slate-400">{body}</p>
     </motion.div>
   );
 }
@@ -424,31 +562,32 @@ function InfoRow({ title, body }: { title: string; body: string }) {
 export function ContactPage() {
   return (
     <SiteShell>
-      <PageHero eyebrow="Contact" title="Let’s talk about products, partnerships, or support." body="For business, product, and support inquiries, reach out through the form below or email the studio directly." />
+      <PageHero eyebrow="Contact" title="Talk to the lab." body="For business, product, support, verification, or partnership inquiries, contact Lippa Labs directly." />
       <Section>
         <div className="grid gap-5 lg:grid-cols-[0.8fr_1.2fr]">
-          <motion.div variants={fadeUp} className="rounded-[2rem] border border-slate-900/8 bg-white/70 p-6 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.055]">
-            <Mail className="text-indigo-600 dark:text-indigo-300" size={24} />
-            <h2 className="mt-5 text-2xl font-black text-slate-950 dark:text-white">Contact details</h2>
-            <p className="mt-3 text-sm font-semibold leading-6 text-slate-600 dark:text-slate-300">
-              Email: <span className="font-black text-slate-950 dark:text-white">hello@lippalabs.com</span>
+          <motion.div variants={fadeUp} className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-lab backdrop-blur-2xl">
+            <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-violet-500/18 blur-3xl" />
+            <Mail className="relative text-sky-200" size={24} />
+            <h2 className="relative mt-5 text-2xl font-black text-white">Contact details</h2>
+            <p className="relative mt-3 text-sm font-semibold leading-6 text-slate-300">
+              Email: <span className="font-black text-white">hello@lippalabs.com</span>
             </p>
-            <div className="mt-5 grid gap-2">
-              {["LinkedIn placeholder", "X/Twitter placeholder", "GitHub placeholder"].map((item) => (
-                <span key={item} className="rounded-2xl bg-slate-950/[0.035] px-3 py-2 text-sm font-bold text-slate-600 dark:bg-white/[0.055] dark:text-slate-300">
+            <div className="relative mt-5 grid gap-2">
+              {["Business inquiries", "Product support", "Partnerships and verification"].map((item) => (
+                <span key={item} className="rounded-2xl border border-white/10 bg-black/24 px-3 py-2 text-sm font-bold text-slate-300">
                   {item}
                 </span>
               ))}
             </div>
           </motion.div>
-          <motion.form variants={fadeUp} className="grid gap-4 rounded-[2rem] border border-slate-900/8 bg-white/74 p-5 shadow-soft backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.055] sm:p-6">
+          <motion.form variants={fadeUp} className="grid gap-4 rounded-[2rem] border border-white/10 bg-[#080b14]/78 p-5 shadow-lab backdrop-blur-2xl sm:p-6">
             <Field label="Name" placeholder="Your name" />
             <Field label="Email" placeholder="you@example.com" type="email" />
-            <label className="grid gap-2 text-sm font-black text-slate-700 dark:text-slate-200">
+            <label className="grid gap-2 text-sm font-black text-slate-200">
               Message
-              <textarea className="min-h-36 rounded-2xl border border-slate-900/10 bg-white/80 px-4 py-3 text-sm font-semibold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 dark:border-white/10 dark:bg-slate-950/70 dark:text-white" placeholder="Tell us what you are working on or what you need." />
+              <textarea className="min-h-36 rounded-2xl border border-white/10 bg-white/[0.055] px-4 py-3 text-sm font-semibold text-white outline-none transition placeholder:text-slate-500 focus:border-sky-300/45 focus:ring-4 focus:ring-sky-400/10" placeholder="Tell us what you are working on or what you need." />
             </label>
-            <button type="button" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-slate-950 px-5 text-sm font-black text-white shadow-soft transition hover:-translate-y-0.5 dark:bg-white dark:text-slate-950">
+            <button type="button" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-white px-5 text-sm font-black text-slate-950 shadow-[0_18px_60px_rgb(255_255_255_/_0.12)] transition hover:-translate-y-0.5">
               Send Message <ArrowRight size={17} />
             </button>
           </motion.form>
@@ -460,9 +599,9 @@ export function ContactPage() {
 
 function Field({ label, placeholder, type = "text" }: { label: string; placeholder: string; type?: string }) {
   return (
-    <label className="grid gap-2 text-sm font-black text-slate-700 dark:text-slate-200">
+    <label className="grid gap-2 text-sm font-black text-slate-200">
       {label}
-      <input type={type} className="min-h-12 rounded-2xl border border-slate-900/10 bg-white/80 px-4 text-sm font-semibold text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-500/10 dark:border-white/10 dark:bg-slate-950/70 dark:text-white" placeholder={placeholder} />
+      <input type={type} className="min-h-12 rounded-2xl border border-white/10 bg-white/[0.055] px-4 text-sm font-semibold text-white outline-none transition placeholder:text-slate-500 focus:border-sky-300/45 focus:ring-4 focus:ring-sky-400/10" placeholder={placeholder} />
     </label>
   );
 }
@@ -480,7 +619,7 @@ export function LegalPage({ type }: { type: "privacy" | "terms" }) {
       />
       <Section>
         <motion.div variants={stagger} className="mx-auto grid max-w-4xl gap-4">
-          <motion.div variants={fadeUp} className="rounded-[1.5rem] border border-slate-900/8 bg-white/70 p-5 text-sm font-semibold leading-7 text-slate-600 shadow-card backdrop-blur-xl dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-300">
+          <motion.div variants={fadeUp} className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-5 text-sm font-semibold leading-7 text-slate-400 shadow-lab backdrop-blur-2xl">
             Last updated: January 2026
           </motion.div>
           {sections.map((section) => (
@@ -545,13 +684,15 @@ const termsSections = [
 function CtaBand() {
   return (
     <section className="px-5 py-14 sm:px-6 lg:px-8 lg:py-20">
-      <motion.div variants={fadeUp} className="mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-slate-900/8 bg-slate-950 p-6 text-white shadow-glow dark:border-white/10 sm:p-8 lg:p-10">
+      <motion.div variants={fadeUp} className="relative mx-auto max-w-6xl overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 text-white shadow-lab backdrop-blur-2xl sm:p-8 lg:p-10">
+        <div className="absolute -right-24 -top-24 h-72 w-72 rounded-full bg-sky-400/18 blur-3xl" />
+        <div className="absolute -bottom-24 left-10 h-72 w-72 rounded-full bg-violet-600/16 blur-3xl" />
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <p className="text-sm font-black uppercase tracking-[0.16em] text-indigo-200">Lippa Labs</p>
-            <h2 className="mt-3 max-w-3xl text-3xl font-black tracking-tight sm:text-5xl">Building calm software for high-friction decisions.</h2>
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-sky-200">Lippa Labs</p>
+            <h2 className="mt-3 max-w-3xl text-4xl font-black leading-[1.02] tracking-[-0.04em] sm:text-5xl">Building software that makes high-friction decisions easier to move through.</h2>
           </div>
-          <PrimaryLink href="/contact" light>Start a conversation</PrimaryLink>
+          <PrimaryLink href="/contact">Start a conversation</PrimaryLink>
         </div>
       </motion.div>
     </section>
@@ -563,8 +704,8 @@ function PageHero({ eyebrow, title, body }: { eyebrow: string; title: string; bo
     <section className="px-5 py-16 sm:px-6 lg:px-8 lg:py-24">
       <motion.div variants={fadeUp} className="mx-auto max-w-7xl">
         <Badge>{eyebrow}</Badge>
-        <h1 className="mt-6 max-w-5xl text-5xl font-black leading-tight tracking-tight text-slate-950 dark:text-white sm:text-6xl">{title}</h1>
-        <p className="mt-5 max-w-3xl text-base font-semibold leading-8 text-slate-600 dark:text-slate-300 sm:text-lg">{body}</p>
+        <h1 className="mt-7 max-w-5xl text-5xl font-black leading-[1.02] tracking-[-0.045em] text-white sm:text-6xl lg:text-7xl">{title}</h1>
+        <p className="mt-6 max-w-3xl text-base font-semibold leading-8 text-slate-300 sm:text-lg">{body}</p>
       </motion.div>
     </section>
   );
@@ -572,12 +713,12 @@ function PageHero({ eyebrow, title, body }: { eyebrow: string; title: string; bo
 
 function Section({ eyebrow, title, children }: { eyebrow?: string; title?: string; children: React.ReactNode }) {
   return (
-    <section className="px-5 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <section className="px-5 py-12 sm:px-6 lg:px-8 lg:py-20">
       <div className="mx-auto max-w-7xl">
         {title ? (
-          <motion.div variants={fadeUp} className="mb-8 max-w-4xl">
-            {eyebrow ? <p className="text-sm font-black uppercase tracking-[0.16em] text-indigo-700 dark:text-indigo-300">{eyebrow}</p> : null}
-            <h2 className="mt-3 text-4xl font-black leading-tight tracking-tight text-slate-950 dark:text-white sm:text-5xl">{title}</h2>
+          <motion.div variants={fadeUp} className="mb-8 max-w-4xl sm:mb-10">
+            {eyebrow ? <p className="text-sm font-black uppercase tracking-[0.18em] text-sky-200">{eyebrow}</p> : null}
+            <h2 className="mt-3 text-4xl font-black leading-[1.03] tracking-[-0.04em] text-white sm:text-5xl lg:text-6xl">{title}</h2>
           </motion.div>
         ) : null}
         {children}
@@ -586,22 +727,19 @@ function Section({ eyebrow, title, children }: { eyebrow?: string; title?: strin
   );
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
+function Badge({ children, icon: Icon = Radar }: { children: React.ReactNode; icon?: LucideIcon }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full border border-slate-900/8 bg-white/70 px-3 py-1.5 text-xs font-black uppercase tracking-[0.16em] text-indigo-700 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.72)] backdrop-blur dark:border-white/10 dark:bg-white/[0.055] dark:text-indigo-200">
-      <Radar size={14} /> {children}
+    <span className="inline-flex items-center gap-2 rounded-full border border-sky-300/20 bg-sky-300/[0.075] px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-sky-100 shadow-[inset_0_1px_0_rgb(255_255_255_/_0.08)] backdrop-blur">
+      <Icon size={14} /> {children}
     </span>
   );
 }
 
-function PrimaryLink({ href, children, light = false }: { href: string; children: React.ReactNode; light?: boolean }) {
+function PrimaryLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
     <Link
       href={href}
-      className={cn(
-        "inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl px-5 text-sm font-black shadow-soft transition hover:-translate-y-0.5",
-        light ? "bg-white text-slate-950" : "bg-slate-950 text-white dark:bg-white dark:text-slate-950"
-      )}
+      className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl bg-white px-5 text-sm font-black text-slate-950 shadow-[0_18px_60px_rgb(255_255_255_/_0.13),0_0_40px_rgb(56_189_248_/_0.12)] transition hover:-translate-y-0.5 hover:shadow-[0_24px_78px_rgb(255_255_255_/_0.16),0_0_52px_rgb(56_189_248_/_0.18)]"
     >
       {children} <ArrowRight size={17} />
     </Link>
@@ -610,7 +748,7 @@ function PrimaryLink({ href, children, light = false }: { href: string; children
 
 function SecondaryLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-slate-900/8 bg-white/70 px-5 text-sm font-black text-slate-700 shadow-card backdrop-blur-xl transition hover:-translate-y-0.5 dark:border-white/10 dark:bg-white/[0.055] dark:text-slate-200">
+    <Link href={href} className="inline-flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-white/10 bg-white/[0.055] px-5 text-sm font-black text-white shadow-lab backdrop-blur-xl transition hover:-translate-y-0.5 hover:border-sky-300/25 hover:bg-sky-300/10">
       {children} <ChevronRight size={17} />
     </Link>
   );
