@@ -8,9 +8,7 @@ import {
   BarChart3,
   Bot,
   BrainCircuit,
-  CheckCircle2,
   ChevronRight,
-  Code2,
   Cpu,
   Fingerprint,
   Layers3,
@@ -24,7 +22,6 @@ import {
   ShieldCheck,
   Sparkles,
   Workflow,
-  Zap,
   type LucideIcon
 } from "lucide-react";
 
@@ -37,6 +34,9 @@ const navItems = [
   { href: "/terms", label: "Terms" },
   { href: "/contact", label: "Contact" }
 ];
+
+const LOGO_FULL_SRC = "/brand/lippa-labs-logo.png";
+const LOGO_MARK_SRC = "/brand/lippa-labs-mark.png";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 26, filter: "blur(10px)" },
@@ -62,9 +62,9 @@ const labProducts = [
     description:
       "AI-assisted budgeting built around spending fences, pacing awareness, bank syncing, and calmer financial decisions.",
     features: ["Adaptive budgeting", "AI insights", "Bank syncing", "Pacing analysis"],
-    accent: "from-sky-400/32 via-blue-600/18 to-transparent",
-    ring: "group-hover:border-sky-300/45",
-    iconTone: "text-sky-200 bg-sky-400/12"
+    accent: "from-[#00E6FF]/32 via-[#007AFF]/18 to-transparent",
+    ring: "group-hover:border-[#00E6FF]/45",
+    iconTone: "text-[#BFF8FF] bg-[#00E6FF]/12"
   },
   {
     name: "TradersDelight",
@@ -74,9 +74,9 @@ const labProducts = [
     description:
       "Trading review system for ticker tracking, disciplined execution, AI-assisted reflection, and behavioral analysis.",
     features: ["Trade review", "Ticker tracking", "Execution notes", "Behavior loops"],
-    accent: "from-violet-400/34 via-fuchsia-600/18 to-transparent",
-    ring: "group-hover:border-violet-300/45",
-    iconTone: "text-violet-200 bg-violet-400/12"
+    accent: "from-[#B14CFF]/34 via-[#7A3CFF]/18 to-transparent",
+    ring: "group-hover:border-[#B14CFF]/45",
+    iconTone: "text-[#F1D7FF] bg-[#B14CFF]/12"
   },
   {
     name: "Future Experiments",
@@ -86,9 +86,9 @@ const labProducts = [
     description:
       "Explorations in AI-assisted workflows, decision support, practical automation, and adaptive product surfaces.",
     features: ["Decision support", "Workflow AI", "Automation", "Adaptive systems"],
-    accent: "from-slate-200/22 via-indigo-500/16 to-transparent",
+    accent: "from-[#F7F8FF]/22 via-[#482CFF]/16 to-transparent",
     ring: "group-hover:border-white/28",
-    iconTone: "text-slate-100 bg-white/10"
+    iconTone: "text-[#F7F8FF] bg-white/10"
   }
 ];
 
@@ -130,7 +130,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className="relative min-h-dvh overflow-x-clip bg-[#05060a] text-white"
+      className="relative min-h-dvh overflow-x-clip bg-[#010208] text-white"
       onPointerMove={(event) => {
         pointerX.set(event.clientX);
         pointerY.set(event.clientY);
@@ -142,13 +142,13 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <motion.div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[1]" style={{ background: cursorLight }} />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed left-[-12rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-sky-500/22 blur-[110px]"
+        className="pointer-events-none fixed left-[-12rem] top-[-10rem] h-[34rem] w-[34rem] rounded-full bg-[#007AFF]/20 blur-[110px]"
         animate={{ x: [0, 70, 0], y: [0, 34, 0], opacity: [0.42, 0.72, 0.42] }}
         transition={{ duration: 11, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         aria-hidden="true"
-        className="pointer-events-none fixed bottom-[-14rem] right-[-10rem] h-[38rem] w-[38rem] rounded-full bg-violet-600/24 blur-[120px]"
+        className="pointer-events-none fixed bottom-[-14rem] right-[-10rem] h-[38rem] w-[38rem] rounded-full bg-[#B14CFF]/20 blur-[120px]"
         animate={{ x: [0, -54, 0], y: [0, -28, 0], opacity: [0.38, 0.68, 0.38] }}
         transition={{ duration: 13, repeat: Infinity, ease: "easeInOut" }}
       />
@@ -163,7 +163,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
 
 function Header({ pathname }: { pathname: string }) {
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05060a]/72 px-4 pt-[env(safe-area-inset-top)] shadow-[0_1px_0_rgb(255_255_255_/_0.04)] backdrop-blur-2xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#010208]/72 px-4 pt-[env(safe-area-inset-top)] shadow-[0_1px_0_rgb(255_255_255_/_0.04)] backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 py-3">
         <Link href="/" aria-label="Lippa Labs home" className="group flex min-w-0 items-center gap-3">
           <BrandMark />
@@ -214,7 +214,7 @@ function Footer() {
     <footer className="relative z-10 border-t border-white/10 px-5 py-10">
       <div className="mx-auto flex max-w-7xl flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
-          <BrandMark />
+          <img src={LOGO_FULL_SRC} alt="Lippa Labs" className="h-24 w-28 shrink-0 rounded-2xl object-contain shadow-[0_0_34px_rgb(72_44_255_/_0.22)]" />
           <div>
             <p className="font-black text-white">Lippa Labs</p>
             <p className="text-sm font-semibold text-slate-400">Independent product studio for practical AI software.</p>
@@ -233,10 +233,8 @@ function Footer() {
 
 function BrandMark() {
   return (
-    <span aria-hidden="true" className="relative grid h-10 w-10 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-white/[0.055] text-sm font-black text-white shadow-[0_0_38px_rgb(56_189_248_/_0.16)]">
-      <span className="absolute inset-0 bg-[conic-gradient(from_160deg_at_50%_50%,rgb(56_189_248_/_0.75),rgb(124_58_237_/_0.55),rgb(255_255_255_/_0.12),rgb(56_189_248_/_0.75))]" />
-      <span className="absolute inset-[1px] rounded-[15px] bg-[#070910]" />
-      <span className="relative">LL</span>
+    <span className="relative grid h-11 w-11 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/10 bg-black shadow-[0_0_38px_rgb(72_44_255_/_0.22)]">
+      <img src={LOGO_MARK_SRC} alt="Lippa Labs" className="h-full w-full object-cover" />
     </span>
   );
 }
@@ -290,7 +288,7 @@ function Hero() {
             Building intelligent systems for real-world decisions.
           </h1>
           <p className="mx-auto mt-7 max-w-3xl text-base font-semibold leading-8 text-slate-300 sm:text-lg lg:mx-0">
-            Independent product studio creating AI-assisted tools across finance, markets, productivity, and behavioral systems.
+            Lippa Labs is an independent product studio creating AI-assisted tools across finance, markets, productivity, and behavioral systems.
           </p>
           <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
             <PrimaryLink href="/products">View Products</PrimaryLink>
@@ -307,130 +305,54 @@ function Hero() {
 
 function HeroLabConsole() {
   return (
-    <div className="relative min-h-[430px] sm:min-h-[500px]">
-      <NodeConstellation />
+    <div className="relative flex min-h-[520px] flex-col items-center justify-center gap-4 sm:min-h-[600px]">
+      <LogoParticleField />
       <motion.div
         aria-hidden="true"
-        className="absolute inset-4 rounded-[3rem] bg-[conic-gradient(from_210deg_at_50%_50%,rgb(56_189_248_/_0.30),rgb(124_58_237_/_0.32),rgb(255_255_255_/_0.08),rgb(56_189_248_/_0.30))] blur-3xl"
+        className="absolute inset-8 rounded-full bg-[conic-gradient(from_210deg_at_50%_50%,rgb(0_230_255_/_0.22),rgb(72_44_255_/_0.26),rgb(177_65_255_/_0.24),rgb(0_122_255_/_0.22),rgb(0_230_255_/_0.22))] blur-3xl"
         animate={{ rotate: 360 }}
-        transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+        transition={{ duration: 34, repeat: Infinity, ease: "linear" }}
       />
       <motion.div
-        className="absolute left-0 top-8 w-[82%] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.065] p-4 shadow-lab backdrop-blur-2xl sm:p-5"
+        className="relative z-20 w-[min(28rem,92vw)] overflow-hidden rounded-[2rem] border border-white/10 bg-black/54 p-3 shadow-[0_32px_110px_rgb(72_44_255_/_0.20),inset_0_1px_0_rgb(255_255_255_/_0.10)] backdrop-blur-2xl sm:p-4"
         animate={{ y: [0, -10, 0] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       >
-        <div className="scanline absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-200/80 to-transparent" />
-        <div className="flex items-center justify-between border-b border-white/10 pb-4">
-          <div className="flex gap-2">
-            <span className="h-2.5 w-2.5 rounded-full bg-sky-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-violet-300" />
-            <span className="h-2.5 w-2.5 rounded-full bg-white/30" />
-          </div>
-          <span className="rounded-full bg-sky-300/10 px-3 py-1 text-xs font-black uppercase tracking-[0.14em] text-sky-100">Live lab</span>
-        </div>
-        <div className="mt-5 grid gap-3">
-          <div className="rounded-2xl border border-sky-300/20 bg-sky-300/[0.075] p-4">
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-sky-200">Signal engine</p>
-            <p className="mt-2 text-2xl font-black tracking-tight text-white">3 products moving</p>
-          </div>
-          {[
-            ["decision.patterns", "behavior + context"],
-            ["workflow.loop", "capture + reflect"],
-            ["interface.state", "fast + mobile"]
-          ].map(([key, value]) => (
-            <div key={key} className="flex items-center justify-between rounded-2xl border border-white/10 bg-black/24 px-4 py-3 font-mono text-xs">
-              <span className="text-slate-400">{key}</span>
-              <span className="text-slate-100">{value}</span>
-            </div>
-          ))}
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_24%_28%,rgb(177_65_255_/_0.16),transparent_15rem),radial-gradient(circle_at_78%_42%,rgb(0_230_255_/_0.12),transparent_16rem)]" />
+        <div className="scanline absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-cyan-200/80 to-transparent" />
+        <img src={LOGO_FULL_SRC} alt="Lippa Labs particle-cloud logo" className="relative z-10 aspect-[1076/960] w-full rounded-[1.45rem] object-cover shadow-[inset_0_1px_0_rgb(255_255_255_/_0.08)]" />
       </motion.div>
-      <ExperimentCapsule className="absolute right-5 top-[8.5rem] w-24 sm:right-10 sm:w-28" tone="sky" />
-      <ExperimentCapsule className="absolute bottom-[7.5rem] left-[1.5rem] w-20 sm:w-24" tone="violet" delay={1.1} />
-      <FloatingProductCard className="absolute right-0 top-0 w-[52%]" product={labProducts[0]} delay={0} />
-      <FloatingProductCard className="absolute bottom-16 right-2 w-[58%]" product={labProducts[1]} delay={0.4} />
-      <motion.div
-        className="absolute bottom-0 left-4 w-[64%] rounded-[1.75rem] border border-white/10 bg-[#080b14]/86 p-4 shadow-lab backdrop-blur-2xl"
-        animate={{ y: [0, 12, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
-      >
-        <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-violet-400/12 text-violet-100">
-            <Code2 size={19} />
-          </div>
-          <div>
-            <p className="text-sm font-black text-white">Future Experiments</p>
-            <p className="text-xs font-bold text-slate-400">AI workflow systems</p>
-          </div>
-        </div>
-        <div className="mt-4 grid grid-cols-4 gap-1.5">
-          {[42, 70, 58, 86].map((height, index) => (
-            <span key={height} className="rounded-full bg-gradient-to-t from-violet-500/55 to-sky-300/70" style={{ height: `${height}px`, opacity: 0.55 + index * 0.1 }} />
-          ))}
-        </div>
+      <motion.div variants={stagger} className="relative z-30 grid w-full gap-3 sm:grid-cols-3">
+        {labProducts.map((product, index) => (
+          <FloatingProductCard key={product.name} className="w-full" product={product} delay={index * 0.16} />
+        ))}
       </motion.div>
     </div>
   );
 }
 
-function NodeConstellation() {
+function LogoParticleField() {
   return (
-    <motion.div
-      aria-hidden="true"
-      className="absolute inset-x-6 top-16 h-52 rounded-[2.5rem] border border-white/10 bg-[radial-gradient(circle_at_50%_45%,rgb(56_189_248_/_0.12),transparent_62%)] opacity-80"
-      animate={{ y: [0, 12, 0], opacity: [0.54, 0.82, 0.54] }}
-      transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-    >
-      <svg className="h-full w-full" viewBox="0 0 520 220" role="presentation">
-        <defs>
-          <linearGradient id="labLine" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0%" stopColor="rgb(125 211 252 / 0.05)" />
-            <stop offset="45%" stopColor="rgb(125 211 252 / 0.56)" />
-            <stop offset="100%" stopColor="rgb(167 139 250 / 0.08)" />
-          </linearGradient>
-        </defs>
-        <path d="M40 160 C130 40 230 194 318 84 S452 52 490 126" fill="none" stroke="url(#labLine)" strokeWidth="1.4" />
-        <path d="M86 92 L182 150 L278 70 L392 128" fill="none" stroke="rgb(255 255 255 / 0.10)" strokeWidth="1" />
-        {[
-          [40, 160],
-          [86, 92],
-          [182, 150],
-          [278, 70],
-          [318, 84],
-          [392, 128],
-          [490, 126]
-        ].map(([cx, cy]) => (
-          <circle key={`${cx}-${cy}`} cx={cx} cy={cy} r="4" fill="rgb(226 232 240 / 0.85)" />
-        ))}
-      </svg>
-    </motion.div>
-  );
-}
-
-function ExperimentCapsule({ className, tone, delay = 0 }: { className: string; tone: "sky" | "violet"; delay?: number }) {
-  const isSky = tone === "sky";
-
-  return (
-    <motion.div
-      aria-hidden="true"
-      className={cn("overflow-hidden rounded-full border border-white/10 bg-white/[0.055] p-1 shadow-lab backdrop-blur-xl", className)}
-      animate={{ y: [0, -12, 0], rotate: [0, isSky ? 3 : -3, 0] }}
-      transition={{ duration: 7.8, repeat: Infinity, ease: "easeInOut", delay }}
-    >
-      <div className="relative h-40 overflow-hidden rounded-full border border-white/10 bg-black/30">
-        <motion.div
-          className={cn(
-            "lab-liquid absolute inset-x-0 bottom-0 h-[58%]",
-            isSky ? "bg-sky-300/45 shadow-[0_0_34px_rgb(56_189_248_/_0.32)]" : "bg-violet-400/42 shadow-[0_0_34px_rgb(167_139_250_/_0.28)]"
-          )}
-          animate={{ height: ["48%", "62%", "52%"] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay }}
+    <div aria-hidden="true" className="absolute inset-0 overflow-hidden rounded-[3rem]">
+      <div className="absolute inset-10 rounded-full border border-cyan-200/10 bg-[radial-gradient(circle_at_50%_42%,rgb(72_44_255_/_0.14),transparent_62%)] opacity-80" />
+      <div className="particle-ring absolute left-1/2 top-[42%] h-[24rem] w-[24rem] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-70" />
+      {Array.from({ length: 22 }).map((_, index) => (
+        <span
+          key={index}
+          className="logo-spark absolute rounded-full bg-cyan-100 shadow-[0_0_18px_rgb(0_230_255_/_0.75)]"
+          style={{
+            animationDelay: `${index * 0.18}s`,
+            height: `${2 + (index % 4)}px`,
+            left: `${8 + ((index * 37) % 84)}%`,
+            top: `${10 + ((index * 29) % 78)}%`,
+            width: `${2 + (index % 4)}px`
+          }}
         />
-        <div className="absolute inset-x-5 top-5 h-px bg-white/25" />
-        <div className="absolute inset-x-4 top-10 h-px bg-white/10" />
-      </div>
-    </motion.div>
+      ))}
+      <div className="absolute bottom-16 left-8 right-8 h-px bg-gradient-to-r from-transparent via-cyan-200/45 to-transparent" />
+      <div className="absolute left-[18%] top-[24%] h-2 w-2 rounded-full bg-[#B14CFF] shadow-[0_0_26px_rgb(177_76_255_/_0.85)]" />
+      <div className="absolute right-[16%] top-[40%] h-2.5 w-2.5 rounded-full bg-[#00E6FF] shadow-[0_0_28px_rgb(0_230_255_/_0.85)]" />
+    </div>
   );
 }
 
@@ -439,7 +361,7 @@ function FloatingProductCard({ product, className, delay }: { product: (typeof l
 
   return (
     <motion.div
-      className={cn("rounded-[1.75rem] border border-white/10 bg-[#080b14]/82 p-4 shadow-lab backdrop-blur-2xl", className)}
+      className={cn("rounded-[1.75rem] border border-white/10 bg-[#05030b]/82 p-4 shadow-lab backdrop-blur-2xl", className)}
       animate={{ y: [0, -14, 0], rotate: [0, 1.2, 0] }}
       transition={{ duration: 7.5, repeat: Infinity, ease: "easeInOut", delay }}
     >
@@ -484,7 +406,7 @@ function BuilderSection() {
 
 function MetricCard({ value, label }: { value: string; label: string }) {
   return (
-    <motion.div variants={fadeUp} whileHover={{ y: -6, rotate: -0.5 }} className="rounded-[1.75rem] border border-white/10 bg-[#080b14]/72 p-5 shadow-lab backdrop-blur-2xl">
+    <motion.div variants={fadeUp} whileHover={{ y: -6, rotate: -0.5 }} className="rounded-[1.75rem] border border-white/10 bg-[#05030b]/72 p-5 shadow-lab backdrop-blur-2xl">
       <p className="text-4xl font-black tracking-[-0.04em] text-white">{value}</p>
       <p className="mt-4 text-sm font-bold leading-6 text-slate-400">{label}</p>
     </motion.div>
@@ -571,7 +493,7 @@ function ProductCard({
       variants={fadeUp}
       whileHover={{ y: -9, rotateX: 1.5, rotateY: -1.5, transition: { duration: 0.22 } }}
       className={cn(
-        "group relative min-h-[30rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#080b14]/78 p-5 shadow-lab backdrop-blur-2xl transition",
+        "group relative min-h-[30rem] overflow-hidden rounded-[2rem] border border-white/10 bg-[#05030b]/78 p-5 shadow-lab backdrop-blur-2xl transition",
         ring
       )}
     >
@@ -720,7 +642,7 @@ export function ContactPage() {
               ))}
             </div>
           </motion.div>
-          <motion.form variants={fadeUp} className="grid gap-4 rounded-[2rem] border border-white/10 bg-[#080b14]/78 p-5 shadow-lab backdrop-blur-2xl sm:p-6">
+          <motion.form variants={fadeUp} className="grid gap-4 rounded-[2rem] border border-white/10 bg-[#05030b]/78 p-5 shadow-lab backdrop-blur-2xl sm:p-6">
             <Field label="Name" placeholder="Your name" />
             <Field label="Email" placeholder="you@example.com" type="email" />
             <label className="grid gap-2 text-sm font-black text-slate-200">

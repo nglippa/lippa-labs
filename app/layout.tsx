@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const siteUrl = "https://lippalabs.com";
+const description = "Lippa Labs is an independent product studio creating AI-assisted tools across finance, markets, productivity, and behavioral systems.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -9,19 +10,35 @@ export const metadata: Metadata = {
     default: "Lippa Labs",
     template: "%s | Lippa Labs"
   },
-  description: "Independent software studio building AI-assisted tools for finance, productivity, and decision support.",
+  description,
   applicationName: "Lippa Labs",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" }
+    ],
+    apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }]
+  },
   openGraph: {
     title: "Lippa Labs",
-    description: "Independent software studio building AI-assisted tools for finance, productivity, and decision support.",
+    description,
     url: siteUrl,
     siteName: "Lippa Labs",
-    type: "website"
+    type: "website",
+    images: [
+      {
+        url: "/brand/lippa-labs-og.png",
+        width: 1200,
+        height: 630,
+        alt: "Lippa Labs particle-cloud logo"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
     title: "Lippa Labs",
-    description: "Independent software studio building AI-assisted tools for finance, productivity, and decision support."
+    description,
+    images: ["/brand/lippa-labs-og.png"]
   },
   robots: {
     index: true,
@@ -33,8 +50,8 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafc" },
-    { media: "(prefers-color-scheme: dark)", color: "#080b12" }
+    { media: "(prefers-color-scheme: light)", color: "#010208" },
+    { media: "(prefers-color-scheme: dark)", color: "#010208" }
   ]
 };
 
