@@ -233,6 +233,7 @@ function Footer() {
             <a href="mailto:hello@lippalabs.com" className="mt-3 inline-flex text-sm font-black text-cyan-100 transition hover:text-white">
               hello@lippalabs.com
             </a>
+            <FounderTagline className="mt-4" />
           </div>
         </div>
         <div className="grid gap-3 text-sm font-bold text-slate-400">
@@ -262,6 +263,19 @@ function BrandMark() {
     <span className="relative grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-2xl border border-white/15 bg-[#232838] shadow-[0_0_34px_rgb(0_230_255_/_0.18),0_0_44px_rgb(177_76_255_/_0.16)]">
       <img src={LOGO_MARK_SRC} alt="Lippa Labs" className="h-full w-full object-cover" />
     </span>
+  );
+}
+
+function FounderTagline({ className }: { className?: string }) {
+  return (
+    <p
+      className={cn(
+        "relative inline-flex w-fit items-center rounded-full border border-cyan-200/12 bg-cyan-300/[0.045] px-3 py-1.5 text-xs font-black tracking-[0.08em] text-cyan-100/80 shadow-[0_0_28px_rgb(0_230_255_/_0.08),inset_0_1px_0_rgb(255_255_255_/_0.08)] backdrop-blur transition hover:border-cyan-200/22 hover:text-cyan-50 hover:shadow-[0_0_34px_rgb(0_230_255_/_0.12),inset_0_1px_0_rgb(255_255_255_/_0.12)]",
+        className
+      )}
+    >
+      Built by Buster @ Lippa Labs
+    </p>
   );
 }
 
@@ -458,6 +472,7 @@ function BuilderSection() {
           <p className="relative mt-4 text-base font-semibold leading-8 text-slate-300">
             Built by Nicholas Lippa with a focus on practical tools, fast iteration, and software that feels useful in real life.
           </p>
+          <FounderTagline className="mt-5" />
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           <MetricCard value="01" label="Founder-led product direction" />
@@ -736,6 +751,7 @@ export function AboutPage() {
             <p className="relative mt-4 text-base font-semibold leading-8 text-slate-300">
               Built by Nicholas Lippa with a focus on practical tools, fast iteration, and software that feels useful in real life.
             </p>
+            <FounderTagline className="mt-5" />
           </motion.div>
           <motion.div variants={stagger} className="grid gap-4">
             {[
