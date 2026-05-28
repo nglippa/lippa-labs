@@ -116,6 +116,10 @@ textarea {
   animation: scanline 4.8s ease-in-out infinite;
 }
 
+.data-fragment {
+  animation: data-fragment-drift 9s ease-in-out infinite;
+}
+
 @keyframes lab-mesh {
   0%,
   100% {
@@ -179,6 +183,19 @@ textarea {
   100% {
     transform: translateY(26rem);
     opacity: 0;
+  }
+}
+
+@keyframes data-fragment-drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.36;
+  }
+
+  50% {
+    transform: translate3d(10px, -18px, 0);
+    opacity: 0.74;
   }
 }
 

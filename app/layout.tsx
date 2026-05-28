@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 const siteUrl = "https://lippalabs.com";
-const description = "Lippa Labs is an independent product studio creating AI-assisted tools across finance, markets, productivity, and behavioral systems.";
+const description = "Lippa Labs develops AI-assisted products including SpendFence and TradersDelight across finance, markets, productivity, and behavioral systems.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -12,6 +12,14 @@ export const metadata: Metadata = {
   },
   description,
   applicationName: "Lippa Labs",
+  keywords: [
+    "Lippa Labs",
+    "SpendFence",
+    "TradersDelight",
+    "AI product studio",
+    "finance software",
+    "trading journal"
+  ],
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -20,7 +28,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }]
   },
   openGraph: {
-    title: "Lippa Labs",
+    title: "Lippa Labs | SpendFence and TradersDelight",
     description,
     url: siteUrl,
     siteName: "Lippa Labs",
