@@ -40,6 +40,7 @@ const productLaunchLinks = [
   { href: "https://tradersdelight.vercel.app", label: "TradersDelight" }
 ];
 
+const CONTACT_EMAIL = "lippalabsdev@gmail.com";
 const LOGO_FULL_SRC = "/brand/lippa-labs-logo.png";
 const LOGO_MARK_SRC = "/brand/lippa-labs-mark.png";
 
@@ -82,14 +83,14 @@ const labProducts = [
   {
     name: "TradersDelight",
     category: "Trading Journal",
-    status: "EVOLVING",
-    statusLabel: "Active development",
+    status: "Research",
+    statusLabel: "Demo available",
     icon: LineChart,
     description:
-      "Trading review system for ticker tracking, disciplined execution, AI-assisted reflection, and behavioral analysis.",
+      "An experimental trading review and journaling platform focused on reflection, process improvement, and AI-assisted trade analysis.",
     features: ["Trade review", "Ticker tracking", "Execution notes", "Behavior loops"],
     href: "https://tradersdelight.vercel.app",
-    ctaLabel: "Launch TradersDelight",
+    ctaLabel: "Explore Demo",
     accent: "from-[#B14CFF]/34 via-[#7A3CFF]/18 to-transparent",
     ring: "group-hover:border-[#B14CFF]/55",
     iconTone: "text-[#F1D7FF] bg-[#B14CFF]/12",
@@ -198,7 +199,7 @@ function Header({ pathname }: { pathname: string }) {
           <BrandMark />
           <span className="hidden truncate text-base font-black tracking-tight text-white sm:block sm:text-lg">Lippa Labs</span>
         </Link>
-        <nav className="flex min-w-0 flex-1 items-center justify-start gap-0.5 overflow-x-auto rounded-full border border-white/10 bg-white/[0.055] p-1 text-xs font-black shadow-[0_0_44px_rgb(0_230_255_/_0.06),inset_0_1px_0_rgb(255_255_255_/_0.08)] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:justify-end sm:gap-1 sm:text-sm [&::-webkit-scrollbar]:hidden">
+        <nav className="ml-auto flex w-fit max-w-[calc(100vw-5.75rem)] shrink-0 items-center justify-start gap-0.5 overflow-x-auto rounded-full border border-white/10 bg-white/[0.055] p-1 text-xs font-black shadow-[0_0_44px_rgb(0_230_255_/_0.06),inset_0_1px_0_rgb(255_255_255_/_0.08)] [-webkit-overflow-scrolling:touch] [scrollbar-width:none] sm:max-w-none sm:gap-1 sm:text-sm [&::-webkit-scrollbar]:hidden">
           {navItems.map((item) => (
             <Link
               key={item.href}
@@ -230,10 +231,12 @@ function Footer() {
           <div className="min-w-0">
             <p className="text-lg font-black text-white">Lippa Labs</p>
             <p className="mt-1 text-sm font-semibold leading-6 text-slate-400">Independent product studio creating AI-assisted tools for real-world decisions.</p>
-            <a href="mailto:hello@lippalabs.com" className="mt-3 inline-flex text-sm font-black text-cyan-100 transition hover:text-white">
-              hello@lippalabs.com
-            </a>
-            <FounderTagline className="mt-4" />
+            <div className="mt-5 grid gap-3">
+              <a href={`mailto:${CONTACT_EMAIL}`} className="inline-flex w-fit text-sm font-black text-cyan-100 transition hover:text-white">
+                {CONTACT_EMAIL}
+              </a>
+              <FounderTagline />
+            </div>
           </div>
         </div>
         <div className="grid gap-3 text-sm font-bold text-slate-400">
@@ -465,14 +468,13 @@ function BuilderSection() {
           <div className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-cyan-400/16 blur-3xl" />
           <div className="absolute inset-0 bg-[linear-gradient(120deg,rgb(255_255_255_/_0.04),transparent_36%,rgb(177_76_255_/_0.07))]" />
           <Badge icon={Fingerprint}>Founder / builder</Badge>
-          <h2 className="relative mt-6 text-3xl font-black leading-[1.04] tracking-[-0.035em] text-white sm:text-5xl">Built by Nicholas Lippa</h2>
+          <h2 className="relative mt-6 text-3xl font-black uppercase leading-[1.04] tracking-[0.08em] text-white sm:text-5xl">FOUNDED BY NICHOLAS LIPPA</h2>
           <p className="relative mt-5 text-base font-semibold leading-8 text-slate-300">
             Lippa Labs is founder-led, product-obsessed, and built around fast iteration. The focus is simple: practical AI, clean interfaces, and tools that make hard decisions easier to act on.
           </p>
           <p className="relative mt-4 text-base font-semibold leading-8 text-slate-300">
-            Built by Nicholas Lippa with a focus on practical tools, fast iteration, and software that feels useful in real life.
+            Nicholas Lippa, who builds publicly as Buster, focuses on practical tools, fast iteration, and software that feels useful in real life.
           </p>
-          <FounderTagline className="mt-5" />
         </div>
         <div className="grid gap-4 sm:grid-cols-3">
           <MetricCard value="01" label="Founder-led product direction" />
@@ -528,7 +530,7 @@ export function ProductsPage() {
       <PageHero
         eyebrow="Products"
         title="Live products and research systems."
-        body="SpendFence and TradersDelight are live Lippa Labs projects. Future Experiments is the research track for early-stage AI-assisted workflows and decision support."
+        body="SpendFence is a live Lippa Labs product. TradersDelight is available as a research preview, and Future Experiments is the track for early-stage AI-assisted workflows and decision support."
       />
       <Section>
         <ProductGrid />
@@ -743,15 +745,14 @@ export function AboutPage() {
         <div className="grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
           <motion.div variants={fadeUp} className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.055] p-6 shadow-lab backdrop-blur-2xl sm:p-8">
             <div className="absolute -right-16 -top-16 h-52 w-52 rounded-full bg-sky-400/18 blur-3xl" />
-            <p className="relative text-sm font-black uppercase tracking-[0.18em] text-sky-200">Built by Nicholas Lippa</p>
+            <p className="relative text-sm font-black uppercase tracking-[0.18em] text-sky-200">FOUNDED BY NICHOLAS LIPPA</p>
             <h2 className="relative mt-4 text-3xl font-black tracking-[-0.04em] text-white sm:text-4xl">Independent, iterative, product-focused.</h2>
             <p className="relative mt-5 text-base font-semibold leading-8 text-slate-300">
               The studio builds in focused loops: identify a real workflow, ship a working surface, learn from usage, and refine until the product feels obvious.
             </p>
             <p className="relative mt-4 text-base font-semibold leading-8 text-slate-300">
-              Built by Nicholas Lippa with a focus on practical tools, fast iteration, and software that feels useful in real life.
+              Nicholas Lippa, who builds publicly as Buster, leads Lippa Labs with a focus on practical tools, fast iteration, and software that feels useful in real life.
             </p>
-            <FounderTagline className="mt-5" />
           </motion.div>
           <motion.div variants={stagger} className="grid gap-4">
             {[
@@ -789,7 +790,7 @@ export function ContactPage() {
             <Mail className="relative text-sky-200" size={24} />
             <h2 className="relative mt-5 text-2xl font-black text-white">Contact details</h2>
             <p className="relative mt-3 text-sm font-semibold leading-6 text-slate-300">
-              Email: <span className="font-black text-white">hello@lippalabs.com</span>
+              Email: <span className="font-black text-white">{CONTACT_EMAIL}</span>
             </p>
             <div className="relative mt-5 grid gap-2">
               {["Business inquiries", "Product support", "Partnerships and verification"].map((item) => (
@@ -869,7 +870,7 @@ const privacySections = [
   },
   {
     title: "Contact",
-    body: "For privacy questions, contact hello@lippalabs.com. Product-specific privacy details may be provided inside individual applications as they mature."
+    body: `For privacy questions, contact ${CONTACT_EMAIL}. Product-specific privacy details may be provided inside individual applications as they mature.`
   }
 ];
 
@@ -896,7 +897,7 @@ const termsSections = [
   },
   {
     title: "Contact",
-    body: "Questions about these terms can be sent to hello@lippalabs.com."
+    body: `Questions about these terms can be sent to ${CONTACT_EMAIL}.`
   }
 ];
 
