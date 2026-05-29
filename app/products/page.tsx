@@ -5,11 +5,11 @@ import { ProductsPage } from "@/components/site";
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "Explore Lippa Labs products including SpendFence for adaptive budgeting and the TradersDelight research preview for trading review workflows.",
+    "Explore Lippa Labs products including SpendFence, GigLedger for independent worker finance, and the TradersDelight research preview.",
   openGraph: {
-    title: "Lippa Labs Products | SpendFence and TradersDelight",
+    title: "Lippa Labs Products | SpendFence, GigLedger, and TradersDelight",
     description:
-      "Explore Lippa Labs products including SpendFence for adaptive budgeting and the TradersDelight research preview for trading review workflows."
+      "Explore Lippa Labs products including SpendFence, GigLedger for independent worker finance, and the TradersDelight research preview."
   }
 };
 

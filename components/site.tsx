@@ -22,6 +22,7 @@ import {
   Rocket,
   ShieldCheck,
   Sparkles,
+  WalletCards,
   Workflow,
   type LucideIcon
 } from "lucide-react";
@@ -79,6 +80,25 @@ const labProducts = [
     chipTone:
       "border-[#7CFBE0]/40 bg-[#092529]/80 text-[#E7FFF9] shadow-[0_10px_28px_rgb(0_230_255_/_0.16),0_0_22px_rgb(22_247_168_/_0.14),inset_0_1px_0_rgb(216_255_243_/_0.24),inset_0_-1px_0_rgb(22_247_168_/_0.10)] hover:border-[#B7FFF0]/60 hover:bg-[#0D3233]/90 hover:shadow-[0_14px_34px_rgb(0_230_255_/_0.20),0_0_30px_rgb(22_247_168_/_0.22),inset_0_1px_0_rgb(216_255_243_/_0.32)]",
     preview: ["budget.signal", "fence status", "adaptive pacing"]
+  },
+  {
+    name: "GigLedger",
+    category: "Independent Worker Finance",
+    status: "ACTIVE DEV",
+    statusLabel: "Active Development",
+    icon: WalletCards,
+    description:
+      "A financial operating system for freelancers, contractors, gig workers, creators, and self-employed professionals.",
+    features: ["Income tracking", "Expense capture", "Mileage", "Quarterly planning"],
+    ctaLabel: "Active Development",
+    accent: "from-[#7CFBE0]/30 via-[#1FB6FF]/16 to-transparent",
+    ring: "group-hover:border-[#7CFBE0]/50",
+    iconTone: "text-[#E7FFF9] bg-[#1FB6FF]/12",
+    statusTone: "bg-[#7CFBE0] shadow-[0_0_18px_rgb(124_251_224_/_0.72)]",
+    ctaTone: "border-[#7CFBE0]/24 bg-[#7CFBE0]/10 text-[#E7FFF9]",
+    chipTone:
+      "border-[#7CFBE0]/36 bg-[#092529]/80 text-[#E7FFF9] shadow-[0_10px_28px_rgb(31_182_255_/_0.14),0_0_22px_rgb(124_251_224_/_0.12),inset_0_1px_0_rgb(231_255_249_/_0.22),inset_0_-1px_0_rgb(31_182_255_/_0.10)] hover:border-[#B7FFF0]/58 hover:bg-[#0D3233]/90",
+    preview: ["income.flow", "expense capture", "ready ledger"]
   },
   {
     name: "TradersDelight",
@@ -530,7 +550,7 @@ export function ProductsPage() {
       <PageHero
         eyebrow="Products"
         title="Live products and research systems."
-        body="SpendFence is a live Lippa Labs product. TradersDelight is available as a research preview, and Future Experiments is the track for early-stage AI-assisted workflows and decision support."
+        body="SpendFence is live, GigLedger is in active development, TradersDelight is available as a research preview, and Future Experiments is the track for early-stage AI-assisted workflows and decision support."
       />
       <Section>
         <ProductGrid />
